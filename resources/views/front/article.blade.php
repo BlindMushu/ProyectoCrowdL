@@ -21,12 +21,14 @@
 				    <th style="border: hidden"><h5>Monto total requerido</h5></th>
 				    <th style="border: hidden"><h5>Tiempo de pago estimado</h5></th>
 				    <th style="border: hidden"><h5>Tasa de interes</h5></th>
+				    <th style="border: hidden"><h5>Monto recaudado</h5></th>
   				</tr>
   				<tr style="border: hidden">
 				    <td style="border: hidden"><h5>{{$article->user->name}}</h5></td>
 				    <td style="border: hidden"><h5>{{$article->amount}} Bs.</h5></td>
 				    <td style="border: hidden"><h5>{{$article->years}} años</h5></td>
 				    <td style="border: hidden"><h5>{{$article->interest}}%</h5></td>
+				    <td style="border: hidden"><h5></h5></td>
   				</tr>
 			</table>
 			<hr>
