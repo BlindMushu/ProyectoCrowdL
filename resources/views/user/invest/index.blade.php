@@ -11,7 +11,7 @@
 			<th>Titulo</th>
 			<th>Monto</th>
 			<th>Total Pagado</th>
-			<th>Ganancias</th>
+			<th>Ganancias </th>
 			<th>Accion</th>
 		</thead>
 
