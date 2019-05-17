@@ -1,5 +1,7 @@
 <?php
-Route::get('/','FrontController@index')->name('front.index');
+//Route::get('/','FrontController@index')->name('front.index');
+
+Route::get('/','HomeController@index')->name('home.index');
 
 Route::get('categores/{name}', [
     'uses'  => 'FrontController@searchCategory',
@@ -19,7 +21,7 @@ Route::get('articles/{slug}', [
 
 
 Route::get('admin', [
-    'uses'  => 'HomeController@index',
+    'uses'  => 'WelcomeController@index',
     'as'    => 'admin.welcome'
 ]);
 

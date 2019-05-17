@@ -29,7 +29,7 @@
       <li class="nav-item active"><a class="nav-link" href="{{ route('images.index')}}">Imagenes</a></li>
       </ul>
       <ul class = "nav navbar-nav navbar-right">
-        <li><a href="{{route('front.index')}}" target ="_blank"></a></li>
+        <li><a href="{{route('home.index')}}" target ="_blank"></a></li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
          {{Auth::user()->name}}
@@ -49,7 +49,7 @@
       <li class="nav-item active"><a class="nav-link" href="{{ route('trades.index')}}">Trading</a></li>
       </ul>
       <ul class = "nav navbar-nav navbar-right">
-        <li><a href="{{route('front.index')}}" target ="_blank"></a></li>
+        <li><a href="{{route('home.index')}}" target ="_blank"></a></li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
          {{Auth::user()->name}}
