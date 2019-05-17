@@ -230,10 +230,26 @@ class InvestsController extends Controller
     public function show($id)
     {
         $invest = Invest::find($id);
-        $payments = PaymentInvest::where('invest_id', $invest->id)->orderBy('id','ASC')->paginate(5);
+        $payments = PaymentInvest::where('invest_id', $invest->id)->orderBy('id','ASC')->get();
+        
+        $total_profit = 0;
+        $total_capital = 0;
+        foreach ($payments as $payment) {
+            
+            $total_profit = $total_profit + $payment->interest_amount;
+            $total_capital = $total_capital + $payment->capital_amount;
+        };
+
+        $dato[] = [
+                'profit'    =>  $total_profit,
+                'capital'   =>  $total_capital,
+            ];
+
+        $collection = collect($dato)->paginate(5);
         return view('user.invest.show')
             ->with('payments', $payments)
-            ->with('invest', $invest);
+            ->with('invest', $invest)
+            ->with('collection', $collection);
     }
     public function __construct()
     {

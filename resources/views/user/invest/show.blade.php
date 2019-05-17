@@ -3,6 +3,21 @@
 @section('title', 'Listado de pagos de la inversion ' . $invest->id)
 
 @section('content')
+
+	<div>
+		<table class="table table-striped">
+		<thead>
+			@foreach($collection as $dato)
+			<th>Ganancia total</th>
+			<th>{{$dato['profit']}}</th>
+			<th>Capital total</th>
+			<th>{{$dato['capital']}}</th>
+			@endforeach
+		</thead>
+		
+	</table>
+	</div>
+
 	<table class="table table-striped">
 		<thead>
 			<th>Interes</th>
@@ -40,5 +55,4 @@
 		</tbody>
 	</table>
 
-		{!!$payments->render()!!}
 @endsection

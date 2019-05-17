@@ -37,6 +37,7 @@ class TradesController extends Controller
                     'amount' => $invest->amount,
                    ];
         }
+        
         $collection = collect($data)->paginate(5);
         return view('user.trade.index')
             ->with('collection', $collection);
