@@ -28,6 +28,20 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+import VueResource from 'vue-resource';
+Vue.use(VueResource);
+
+import {ServerTable} from 'vue-tables-2';
+Vue.use(ServerTable, {}, false, 'bootstrap4', 'default');
+
+Vue.http.interceptors.push((request, next) => {
+	const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+	request.headers.set('X-CSRF-TOKEN', csrfToken);
+	next();
+});
+
+// Vue.component('promotions', require('./components/PromotionComponent'));
+
 const app = new Vue({
     el: '#app'
 });
