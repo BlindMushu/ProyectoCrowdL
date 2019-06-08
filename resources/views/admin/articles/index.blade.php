@@ -37,10 +37,10 @@
 							</a>
 
 
-							<a href="{{route('admin.articles.destroy', $article->id)}}" class="btn btn-danger">
+							<!--<a href="route('admin.articles.destroy', $article->id)}}" class="btn btn-danger">
 								<span onclick="Seguro que deseas eliminarlo?" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
 							</a>
-
+<-->
 							<a href="{{route('pays.show', $article->id)}}" class="btn btn-success">
 								<span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
 							</a>
