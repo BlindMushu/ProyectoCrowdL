@@ -30,7 +30,7 @@
 								<center><small>{{$d['amount_collected']}} Bs. reunidos de {{$article->amount}} Bs.</small></center>
 								@else
 								<div class="progress">
-		  						<div class="progress-bar bg-info" role="progressbar" style="width: {{($d['amount_collected']/$article->amount)*100}}%" aria-valuenow="{{$d['amount_collected']}}" aria-valuemin="0" aria-valuemax="{{$article->amount}}">{{($d['amount_collected']/$article->amount)*100}}%</div>
+		  						<div class="progress-bar bg-info" role="progressbar" style="width: {{($d['amount_collected']/$article->amount)*100}}%" aria-valuenow="{{$d['amount_collected']}}" aria-valuemin="0" aria-valuemax="{{$article->amount}}">{{floor(($d['amount_collected']/$article->amount)*100)}}%</div>
 								</div>
 								<center><small>{{$d['amount_collected']}} Bs. reunidos de {{$article->amount}} Bs.</small></center>
 								@endif()

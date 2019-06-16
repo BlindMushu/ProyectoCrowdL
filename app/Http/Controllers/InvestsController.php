@@ -174,18 +174,15 @@ class InvestsController extends Controller
                             'capital_amount' => $payment->capital_amount * $x,
                            ];
                 }
-        PaymentInvest::insert($data);
-        Flash::success('La inversion '. $invest->id. ' ha sido creada correctamente!');
+                PaymentInvest::insert($data);
+                Flash::success('La inversion '. $invest->id. ' ha sido creada correctamente!');
+                return redirect()->route('invests.index');
             }
         else
             {
-            Flash::warning('La inversion '. $invest->id. ' no ha sido creada, el monto a invertir supera el monto del prestamo.');
+            Flash::warning('La inversion no ha sido creada, el monto maximo para invertir ahora es de '. $check_point .' Bs.');
+            return back();
             };
-
-
-
-
-        return redirect()->route('invests.index');
     }
 
     /**

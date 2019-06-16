@@ -14,6 +14,7 @@ section {
   width: 65%;
   margin: auto;
 }
+
 </style>
 <body class="admin-body">
 

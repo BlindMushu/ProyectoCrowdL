@@ -30,7 +30,13 @@
 
 
 		<div class="form-group">
-			{!! Form::submit('Comprar', ['class' => 'btn btn-primary'])!!}
+			<input class="btn btn-primary" onclick="return confirm_buy()" type="submit" value="Comprar">
 		</div>
 	{!! Form::close()!!}
+
+<script type="text/javascript">
+function confirm_buy() {
+  return confirm('Esta seguro que quiere comprar?');
+}
+</script>
 @endsection

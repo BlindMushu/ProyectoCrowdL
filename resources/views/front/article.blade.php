@@ -36,6 +36,9 @@
   				</tbody>
 			</table>
 			<hr>
+
+
+			<hr>
 			<h3>Invertir</h3>
 			<table class="table table-striped">
 				<tr>

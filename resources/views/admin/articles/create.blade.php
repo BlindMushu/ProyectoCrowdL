@@ -25,7 +25,7 @@
 	</div>
 
 	<div class="form-group">
-		{!!Form::label('years', 'Años')!!}
+		{!!Form::label('years', 'Meses')!!}
 		{!!Form::text('years', null,['class' => 'form-control'])!!}
 	</div>
 

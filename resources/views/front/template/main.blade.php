@@ -20,6 +20,7 @@ text-decoration:none;
 		@include('front.template.partials.header')
 	</header>
 	<div class='container'>
+		@include('flash::message')
 		@yield('content')
 	<footer>
 		<hr>

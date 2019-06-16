@@ -65,6 +65,7 @@ Route::prefix('admin')->group(function(){
     Route::get('articles/{id}/destroy', 'ArticlesController@destroy')->name('admin.articles.destroy');
 
     Route::get('articles/{id}/edit', 'ArticlesController@edit')->name('admin.articles.edit');
+    Route::get('articles/{id}/show', 'ArticlesController@show')->name('admin.articles.show');
 });
 
 

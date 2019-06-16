@@ -31,7 +31,13 @@
 
 
 		<div class="form-group">
-			{!! Form::submit('Vender', ['class' => 'btn btn-primary'])!!}
+			<input class="btn btn-primary" onclick="return confirm_delete()" type="submit" value="Vender">
 		</div>
 	{!! Form::close()!!}
+
+<script type="text/javascript">
+function confirm_delete() {
+  return confirm('Esta seguro de vender?');
+}
+</script>
 @endsection

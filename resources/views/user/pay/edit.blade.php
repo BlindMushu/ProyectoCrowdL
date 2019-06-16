@@ -18,8 +18,15 @@
 		</div>
 
 		<div class="form-group">
-			{!! Form::submit('Pagar', ['class' => 'btn btn-success'])!!}
+			<input class="btn btn-primary" onclick="return confirm_pay()" type="submit" value="Pagar">
 		</div>
 
 	{!! Form::close()!!}
+
+<script type="text/javascript">
+function confirm_pay() {
+  return confirm('Esta seguro que quiere pagar?');
+}
+</script>
+
 @endsection

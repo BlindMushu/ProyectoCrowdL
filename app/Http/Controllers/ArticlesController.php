@@ -29,7 +29,9 @@ class ArticlesController extends Controller
         $articles -> each(function($articles){
             $articles -> category;
             $articles -> user;
+            $articles -> images;
         });
+
         return view('admin.articles.index')
             ->with('articles', $articles);
     }
@@ -84,7 +86,7 @@ class ArticlesController extends Controller
 
 
         //$payment = new Payment();
-        $count = (($article->years)*12);
+        $count = (($article->years)*1);
         $counts=[];
         for($i = 1; $i <= $count; $i++)
         {
@@ -153,7 +155,9 @@ class ArticlesController extends Controller
      */
     public function show($id)
     {
-        //
+        $article = Article::find($id);
+
+        return view('admin.articles.show');
     }
 
     /**

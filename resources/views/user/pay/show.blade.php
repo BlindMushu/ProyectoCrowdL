@@ -28,11 +28,11 @@
 
 							@if($payment->payday == $fecha_actual)
 								<a href="{{route('pays.edit', $payment->id)}}" class="btn btn-success">
-								<span onclick="Seguro que deseas eliminarlo?" class="glyphicon glyphicon-usd" aria-hidden="true"></span>
+								<span aria-hidden="true">Pagar</span>
 								</a>
 							@else
 								<a href="" class="btn btn-secondary">
-								<span onclick="Seguro que deseas eliminarlo?" class="glyphicon glyphicon-usd" aria-hidden="true"></span>
+								<span aria-hidden="true">Pagar</span>
 								</a>
 							@endif
 
@@ -57,5 +57,5 @@
 		</tbody>
 	</table>
 
-		{!!$payments->render()!!}
+		<center>{!!$payments->render()!!}</center>
 @endsection
