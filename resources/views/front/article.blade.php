@@ -4,10 +4,9 @@
 @section('content')
 <h3 class="title-front left">{{$article->title}}</h3>
 <hr>
-	<div class="row">
-		<div class="col-md-8">
+
 			@foreach($article->images as $image)
-			<img class="img-responsive img-article" src="{{asset('images/articles/' . $image->name)}}" alt="...">
+			<center><img class="img-responsive img-article" src="{{asset('images/articles/' . $image->name)}}" alt="..."></center>
 			@endforeach
 			<hr>
 			<div class="container hyphenation text-justified" lang="es">
@@ -15,7 +14,8 @@
 			</div>
 			<hr>
 			<h3>Informacion</h3>
-			<table border="20" style="border: hidden" >
+			<table class="table table-borderless" >
+				<thead>
 				<tr style="border: hidden">
 				    <th style="border: hidden"><h5>Propietario del proyecto</h5></th>
 				    <th style="border: hidden"><h5>Monto total requerido</h5></th>
@@ -23,16 +23,20 @@
 				    <th style="border: hidden"><h5>Tasa de interes</h5></th>
 				    <th style="border: hidden"><h5>Monto recaudado</h5></th>
   				</tr>
+  				</thead>
+  				<tbody>
+
   				<tr style="border: hidden">
-				    <td style="border: hidden"><h5>{{$article->user->name}}</h5></td>
-				    <td style="border: hidden"><h5>{{$article->amount}} Bs.</h5></td>
-				    <td style="border: hidden"><h5>{{$article->years}} años</h5></td>
-				    <td style="border: hidden"><h5>{{$article->interest}}%</h5></td>
-				    <td style="border: hidden"><h5></h5></td>
+				    <td style="border: hidden"><h5><center>{{$article->user->name}}</center></h5></td>
+				    <td style="border: hidden"><h5><center>{{$article->amount}} Bs.</center></h5></td>
+				    <td style="border: hidden"><h5><center>{{$article->years}} años</center></h5></td>
+				    <td style="border: hidden"><h5><center>{{$article->interest}}%</center></h5></td>
+				    <td style="border: hidden"><h5><center>{{$sum}} Bs.</center></h5></td>
   				</tr>
+  				</tbody>
 			</table>
 			<hr>
-			<h3>Acciones</h3>
+			<h3>Invertir</h3>
 			<table class="table table-striped">
 				<tr>
 					<div class="form-group">
@@ -44,13 +48,19 @@
 						@if(Auth::user()->id === $article->user_id)
 							{!!Form::number('amount', null,['class' => 'form-control', 'readonly'=>'readonly'])!!}
 						@else
-							{!!Form::number('amount', null,['class' => 'form-control', 'min' => '1', 'max' => $article->amount - $sum, 'placeholder' => $article->amount - $sum])!!}
+							{!!Form::number('amount', null,['class' => 'form-control', 'min' => '1', 'max' => $article->amount - $sum, 'placeholder' => $article->amount - $sum, 'required'])!!}
 						@endif
+
 					</td>
 					</div>
+					<td>Bs.</td>
 					<td>
 					<div class="form-group">
-					{!!Form::submit('$', ['class' => 'btn btn-success'])!!}
+						@if(Auth::user()->id === $article->user_id)
+							{!!Form::submit('Invertir', ['class' => 'btn btn-success', 'disabled'])!!}
+						@else
+							{!!Form::submit('Invertir', ['class' => 'btn btn-success'])!!}
+						@endif
 					</div>
 					</td>
 					{!!Form::close()!!}
@@ -76,9 +86,5 @@ s.setAttribute('data-timestamp', +new Date());
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
-		</div>
-		<div class="col-md-4 aside">
-			@include('front.partials.aside')
-		</div>
-	</div>
+
 @endsection

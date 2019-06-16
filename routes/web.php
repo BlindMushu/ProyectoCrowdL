@@ -3,13 +3,13 @@
 
 Route::get('/','HomeController@index')->name('home.index');
 
-Route::get('categores/{name}', [
-    'uses'  => 'FrontController@searchCategory',
+Route::get('categories/{name}', [
+    'uses'  => 'InvestsController@searchCategory',
     'as'    => 'front.search.category'
 ]);
 
 Route::get('tags/{name}', [
-    'uses'  => 'FrontController@searchTag',
+    'uses'  => 'InvestsController@searchTag',
     'as'    => 'front.search.tag'
 ]);
 

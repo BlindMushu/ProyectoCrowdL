@@ -9,12 +9,12 @@
 		<thead>
 			@foreach($collection as $dato)
 			<th>Ganancia total</th>
-			<th>{{$dato['profit']}}</th>
+			<th>{{$dato['profit']}} Bs.</th>
 			<th>Capital total</th>
-			<th>{{$dato['capital']}}</th>
+			<th>{{$dato['capital']}} Bs.</th>
 			@endforeach
 		</thead>
-		
+
 	</table>
 	</div>
 
@@ -32,20 +32,20 @@
 				@if($payment->flag_if_payed == 0)
 
 				<tr>
-					<td>{{$payment->interest_amount}}</td>
-					<td>{{$payment->capital_amount}}</td>
-					<td>{{$payment->pay}}</td>
-					<td>{{$payment->balance}}</td>
+					<td>{{$payment->interest_amount}} Bs.</td>
+					<td>{{$payment->capital_amount}} Bs.</td>
+					<td>{{$payment->pay}} Bs.</td>
+					<td>{{$payment->balance}} Bs.</td>
 					<td><span class="badge bg-primary">PENDIENTE</span></td>
 				</tr>
 
 				@else
 
 				<tr>
-					<td>{{$payment->interest_amount}}</td>
-					<td>{{$payment->capital_amount}}</td>
-					<td>{{$payment->pay}}</td>
-					<td>{{$payment->balance}}</td>
+					<td>{{$payment->interest_amount}} Bs.</td>
+					<td>{{$payment->capital_amount}} Bs.</td>
+					<td>{{$payment->pay}} Bs.</td>
+					<td>{{$payment->balance}} Bs.</td>
 					<td><span class="badge bg-success">PAGADO</span></td>
 				</tr>
 

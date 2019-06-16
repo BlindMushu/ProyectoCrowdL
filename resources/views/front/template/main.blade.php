@@ -5,7 +5,9 @@
 	<title>@yield('title', 'Home') | Proyecto</title>
 	<link rel="stylesheet" href="{{asset('plugins/bootstrap/css/darkly/bootstrap.css')}}">
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
 <style type="text/css">
 a:link
 {
@@ -13,7 +15,6 @@ text-decoration:none;
 }
 </style>
 
-</head>
 <body>
 	<header>
 		@include('front.template.partials.header')

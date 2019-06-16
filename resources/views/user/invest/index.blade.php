@@ -20,9 +20,9 @@
 				<tr>
 					<td>{{$d['id']}}</td>
 					<td>{{$d['title']}}</td>
-					<td>{{$d['amount']}}</td>
-					<td>{{$d['pay']}}</td>
-					<td>{{$d['interest']}}</td>
+					<td>{{$d['amount']}} Bs.</td>
+					<td>{{$d['pay']}} Bs.</td>
+					<td>{{$d['interest']}} Bs.</td>
 					<td>
 							<?php $id=$d['id'] ?>
 							<a href="{{route('invests.edit', $id)}}" class="btn btn-primary"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span>

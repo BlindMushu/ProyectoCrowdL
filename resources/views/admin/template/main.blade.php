@@ -11,8 +11,8 @@
 </head>
 <style>
 section {
-  padding-right: 50px;
-  padding-left: 50px;
+  width: 65%;
+  margin: auto;
 }
 </style>
 <body class="admin-body">

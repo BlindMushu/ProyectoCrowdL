@@ -3,6 +3,7 @@
 @section('title','Vender inversion')
 
 @section('content')
+
 	{!! Form::open(['route' => ['invests.update', $invest], 'method' => 'PUT'])!!}
 		<div class="form-group">
 			{!! Form::label('id', 'ID')!!}

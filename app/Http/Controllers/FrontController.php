@@ -66,6 +66,7 @@ class FrontController extends Controller
         $article->tags;
         $article->images;
         $sum = 0;
+
         $invests = Invest::where('article_id', $article->id)->get();
         foreach($invests as $invest){
             $sum = $sum + $invest->amount;

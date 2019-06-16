@@ -3,28 +3,22 @@
 @section('title', 'Listado de inversiones en venta')
 
 @section('content')
-	<table class="table table-striped">
-		<thead>
-			<th>ID</th>
-			<th>Titulo</th>
-			<th>Monto</th>
-			<th>Accion</th>
-		</thead>
+<div class="card-columns">
+@foreach($collection as $d)
+  <div class="card">
+   <img class="img-responsive img-article" src="{{asset('images/articles/' . $d['image'])}}" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Inversion en {{$d['title']}}</h5>
+      <p class="card-text">Precio de compra: {{$d['amount']}} Bs.</p>
+      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
 
-		<tbody>
-			@foreach($collection as $d)
-				<tr>
-					<td>{{$d['id']}}</td>
-					<td>{{$d['title']}}</td>
-					<td>{{$d['amount']}}</td>
-					<td>
-							<?php $id=$d['id'] ?>
-							<a href="{{route('trades.edit', $id)}}" class="btn btn-success"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
-							</a>
-					</td>
-				</tr>
-			@endforeach
-		</tbody>
-	</table>
-{!!$collection->render()!!}
+      <center>
+      	<?php $id=$d['id'] ?>
+      	<a href="{{route('trades.edit', $id)}}" class="btn btn-success">Comprar</a>
+      </center>
+    </div>
+  </div>
+@endforeach
+</div>
+<center>{!!$collection->render()!!}</center>
 @endsection

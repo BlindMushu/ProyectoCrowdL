@@ -16,6 +16,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Laracasts\Flash\Flash;
 use App\Category;
+use App\Image;
 class TradesController extends Controller
 {
     /**
@@ -31,13 +32,15 @@ class TradesController extends Controller
         foreach($invests as $invest)
         {
             $article = Article::find($invest->article_id);
+            $image = Image::find($invest->article_id);
             $data[] =[
                     'id' => $invest->id,
                     'title' => $article->title,
                     'amount' => $invest->amount,
+                    'image' => $image->name,
                    ];
         }
-        
+
         $collection = collect($data)->paginate(5);
         return view('user.trade.index')
             ->with('collection', $collection);
@@ -100,14 +103,25 @@ class TradesController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+
+
         $a = \Auth::user()->id;
         $invest = Invest::find($id);
-        $invest->fill($request->all());
-        $invest->user_id=$a;
-        $invest->amount_sale=null;
-        $invest->save();
 
-        Flash::warning('La inversion '. $invest->id. ' ha sido comprada con exito!');
+        if($invest->flag_if_sale == 1)
+            {
+                $invest->fill($request->all());
+                $invest->user_id=$a;
+                $invest->amount_sale=null;
+                $invest->save();
+
+                Flash::success('La inversion '. $invest->id. ' ha sido comprada con exito!');
+            }
+        else
+            {
+                Flash::error('La inversion '. $invest->id. ' no ha sido comprada, alguien se ha adelantado!');
+            }
         return redirect()->route('invests.index');
     }
 

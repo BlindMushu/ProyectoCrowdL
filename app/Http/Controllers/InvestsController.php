@@ -94,9 +94,21 @@ class InvestsController extends Controller
             $articles->category;
             $articles->images;
         });
-
+        $sum = 0;
+        foreach ($articles as $article) {
+            $sum = 0;
+            $invests = Invest::where('article_id', $article->id)->get();
+            foreach($invests as $invest){
+                $sum = $sum + $invest->amount;
+            }
+            $data[] = [
+                    'article_id' => $article->id,
+                    'amount_collected' => $sum
+                ];
+        }
         return view('front.index')
-            ->with('articles', $articles);
+            ->with('articles', $articles)
+            ->with('data', $data);
     }
 
     public function searchTag($name)
@@ -133,28 +145,46 @@ class InvestsController extends Controller
      */
     public function store(Request $request)
     {
+
+
         $invest = new Invest($request ->all());
         $invest->user_id = \Auth::user()->id;
-        $invest->save();
-
-
-
         $article = Article::find($invest->article_id);
+        $checks = Invest::where('article_id',$invest->article_id)->get();
+        $amount_check = 0;
 
-        $payments = Payment::where('article_id',$article->id)->get();
-        $x = (($invest->amount)/($article->amount));
-        foreach($payments as $payment)
-        {
-            $data[] =[
-                    'invest_id' => $invest->id,
-                    'payment_id' => $payment->id,
-                    'pay' => $payment->pay * $x,
-                    'balance' => $payment->balance * $x,
-                    'interest_amount' => $payment->interest_amount * $x,
-                    'capital_amount' => $payment->capital_amount * $x,
-                   ];
-        }
+        foreach($checks as $check)
+            {
+                $amount_check = $amount_check + $check->amount;
+            };
+        $check_point = $article->amount - $amount_check;
+        if ($invest->amount <= $check_point)
+            {
+                $invest->save();
+                $payments = Payment::where('article_id',$article->id)->get();
+                $x = (($invest->amount)/($article->amount));
+                foreach($payments as $payment)
+                {
+                    $data[] =[
+                            'invest_id' => $invest->id,
+                            'payment_id' => $payment->id,
+                            'pay' => $payment->pay * $x,
+                            'balance' => $payment->balance * $x,
+                            'interest_amount' => $payment->interest_amount * $x,
+                            'capital_amount' => $payment->capital_amount * $x,
+                           ];
+                }
         PaymentInvest::insert($data);
+        Flash::success('La inversion '. $invest->id. ' ha sido creada correctamente!');
+            }
+        else
+            {
+            Flash::warning('La inversion '. $invest->id. ' no ha sido creada, el monto a invertir supera el monto del prestamo.');
+            };
+
+
+
+
         return redirect()->route('invests.index');
     }
 
@@ -231,11 +261,11 @@ class InvestsController extends Controller
     {
         $invest = Invest::find($id);
         $payments = PaymentInvest::where('invest_id', $invest->id)->orderBy('id','ASC')->get();
-        
+
         $total_profit = 0;
         $total_capital = 0;
         foreach ($payments as $payment) {
-            
+
             $total_profit = $total_profit + $payment->interest_amount;
             $total_capital = $total_capital + $payment->capital_amount;
         };
