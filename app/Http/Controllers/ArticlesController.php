@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Tag;
+use App\User;
+use App\Invest;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Laracasts\Flash\Flash;
@@ -155,9 +157,22 @@ class ArticlesController extends Controller
      */
     public function show($id)
     {
+        $data2 = [];
         $article = Article::find($id);
+        $investors = Invest::where('article_id', $article->id)->get();
 
-        return view('admin.articles.show');
+        foreach ($investors as $investor) {
+            $user = User::find($investor->user_id);
+            $data2[] = [
+                'nombre' => $user -> name,
+                'amount' => $investor -> amount,
+                'date' => $investor -> created_at,
+            ];
+        }
+
+        $collection = collect($data2)->paginate(10);
+        return view('admin.articles.show')
+        ->with('collection', $collection);
     }
 
     /**

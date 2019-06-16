@@ -5,20 +5,21 @@
 @section('content')
 
 		<hr>
-	<table class="table table-striped">
+	<table class="table table-hover">
 		<thead>
-			<th>ID</th>
-			<th>Nombre</th>
-			<th>Accion</th>
+			<th>Nombre del inversionista</th>
+			<th>Monto invertido</th>
+			<th>Fecha de la inversion</th>
 		</thead>
 
 		<tbody>
-
+				@foreach($collection as $d)
 				<tr>
-					<td></td>
-					<td></td>
+					<td>{{$d['nombre']}}</td>
+					<td>{{$d['amount']}}</td>
+					<td>{{$d['date']}}</td>
 				</tr>
-
+				@endforeach
 		</tbody>
 	</table>
 @endsection
