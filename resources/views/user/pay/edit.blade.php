@@ -1,7 +1,7 @@
 @extends('admin.template.main')
 
 @section('title','Pagar cuota #'. $payment->num_pay)
-
+<br>
 @section('content')
 	{!! Form::open(['route' => ['pays.update', $payment], 'method' => 'PUT'])!!}
 		<div class="form-group">

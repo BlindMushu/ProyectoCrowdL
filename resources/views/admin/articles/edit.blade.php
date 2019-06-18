@@ -1,7 +1,8 @@
 @extends('admin.template.main')
 
 @section('title', 'Editar articulo - ' . $article->title)
-
+<br>
+@if(Auth::user()->id === $article->user_id)
 @section('content')
 {!!Form::open(['route' => ['articles.update', $article], 'method' =>'PUT'])!!}
 	<div class="form-group">
@@ -46,3 +47,8 @@
 	$('.textarea-content').trumbowyg();
 </script>
 @endsection
+@else
+	@section('content')
+		<li class="list-group-item list-group-item-danger">Estas tratanto de acceder a un proyecto que no es tuyo y se te ha denegado el accesso.</li>
+	@endsection
+@endif

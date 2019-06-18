@@ -1,5 +1,5 @@
 @extends('admin.template.main')
-
+<br>
 @section('title', 'Listado de inversiones en venta')
 
 @section('content')
@@ -9,8 +9,9 @@
    <img class="img-responsive img-article" src="{{asset('images/articles/' . $d['image'])}}" alt="...">
     <div class="card-body">
       <h5 class="card-title">Inversion en {{$d['title']}}</h5>
-      <p class="card-text">Precio de compra: {{$d['amount']}} Bs.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      Precio de compra: {{$d['amount']}} Bs. <br>
+      Propietario: {{$d['name']}}
+      <p class="card-text"><small class="text-muted">{{$d['date']->diffForHumans()}}</small></p>
 
       <center>
       	<?php $id=$d['id'] ?>

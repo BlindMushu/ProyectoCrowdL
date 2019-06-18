@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use App\Tag;
 use Cviebrock\EloquentSluggable\Sluggable;
 use App\Invest;
+use App\Image;
 use App\Payment;
 use App\PaymentInvest;
 use App\Providers\AppServiceProvider;
@@ -42,15 +43,17 @@ class InvestsController extends Controller
             }
 
             $article = Article::find($invest->article_id);
+            $image = Image::find($article->id);
             $data[] =[
                     'id' => $invest->id,
                     'title' => $article->title,
                     'amount' => $invest->amount,
                     'interest' => $ganancia,
-                    'pay' => $pagos
+                    'pay' => $pagos,
+                    'image' => $image->name
                    ];
         }
-        $collection = collect($data)->paginate(5);
+        $collection = collect($data)->paginate(6);
         return view('user.invest.index')
             ->with('collection', $collection);
     }
@@ -217,7 +220,6 @@ class InvestsController extends Controller
             }
 
         $maximo = $invest->amount - $pagos;
-
         $article = Article::find($invest->article_id);
         return view('user.invest.edit')
             ->with('invest', $invest)
@@ -236,11 +238,30 @@ class InvestsController extends Controller
     public function update(Request $request, $id)
     {
         $invest = Invest::find($id);
-        $invest->fill($request->all());
-        $invest->save();
 
-        Flash::success('La inversion '. $invest->id. ' ha sido publicada para su venta con exito!');
-        return redirect()->route('invests.index');
+        $pays = PaymentInvest::where('invest_id', $invest->id)->where('flag_if_payed', 1)->get();
+
+        $ganancia = 0;
+        $pagos = 0;
+
+            foreach ($pays as $pay)
+            {
+                $ganancia = $ganancia + $pay->interest_amount;
+                $pagos = $pagos + $pay->capital_amount;
+            }
+
+        $maximo = $invest->amount - $pagos;
+
+        if($request->amount_sale <= $maximo){
+            $invest->fill($request->all());
+            $invest->save();
+            Flash::success('La inversion '. $invest->id. ' ha sido publicada para su venta con exito!');
+            return redirect()->route('invests.index');
+        }
+        else{
+            Flash::error('La inversion no ha podido ser publicada para su venta debido a que el monto de venta excede al monto maximo!');
+            return back();
+        };
     }
 
     /**

@@ -1,7 +1,7 @@
 @extends('admin.template.main')
 
 @section('title', 'Listado de Tags')
-
+<br>
 @section('content')
 	<a href="{{ route('tags.create')}}" class="btn btn-info">Registrar nuevo tag</a>
 

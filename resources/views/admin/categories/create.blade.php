@@ -1,7 +1,7 @@
 @extends('admin.template.main')
 
 @section('title','Agregar categoria')
-
+<br>
 @section('content')
 	{!! Form::open(['route' => 'categories.store', 'method' => 'POST'])!!}
 		<div class="form-group">

@@ -21,7 +21,8 @@
     border-top: 1px solid rgba(34, 36, 38, .1);
     box-shadow: none;
 }
-</style>>
+</style>
+<br>
 @section('content')
 	<a href="{{ route('articles.create')}}" class="btn btn-info">Registrar nuevo proyecto</a>
 
@@ -60,7 +61,8 @@
 	        <div class="card-block px-6">
 
 	        	<center><h3 class="card-title">	{{$article->title}}</h3></center>
-
+	    @foreach($data as $d)
+	    	@if($article->id == $d['article_id'])
 	        <table class="table table-borderless">
 	        	<thead>
 	        		<th><center>Categoria</center></th>
@@ -72,9 +74,12 @@
 	        		<td><center>{{$article->category->name}}</center></td>
 	        		<td><center>{{$article->interest}} %</center></td>
 	        		<td><center>{{$article->amount}} Bs.</center></td>
-	        		<td><center>{{$article->amount}} Bs.</center></td>
+
+	        		<td><center>{{$d['amount_collected']}} Bs.</center></td>
 	        	</tbody>
 	        </table>
+	        @endif
+	    @endforeach
 	        <br>
 	        <center>
 

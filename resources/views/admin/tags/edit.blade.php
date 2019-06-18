@@ -1,7 +1,7 @@
 @extends('admin.template.main')
 
 @section('title','Editar tag '. $tag->name)
-
+<br>
 @section('content')
 	{!! Form::open(['route' => ['tags.update', $tag], 'method' => 'PUT'])!!}
 		<div class="form-group">

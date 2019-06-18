@@ -17,6 +17,7 @@ use App\Http\Controllers\Controller;
 use Laracasts\Flash\Flash;
 use App\Category;
 use App\Image;
+use App\User;
 class TradesController extends Controller
 {
     /**
@@ -26,22 +27,25 @@ class TradesController extends Controller
      */
     public function index()
     {
-        $invests = Invest::where('flag_if_sale', '=', 1)->get();
+        $invests = Invest::where('flag_if_sale', '=', 1)->orderBy('updated_at','DESC')->get();
         $data=[];
         $article;
         foreach($invests as $invest)
         {
             $article = Article::find($invest->article_id);
             $image = Image::find($invest->article_id);
+            $user = User::find($invest->user_id);
             $data[] =[
                     'id' => $invest->id,
                     'title' => $article->title,
                     'amount' => $invest->amount,
                     'image' => $image->name,
+                    'date' => $invest->updated_at,
+                    'name' => $user->name,
                    ];
         }
 
-        $collection = collect($data)->paginate(5);
+        $collection = collect($data)->paginate(6);
         return view('user.trade.index')
             ->with('collection', $collection);
     }
@@ -88,10 +92,11 @@ class TradesController extends Controller
     {
         $invest = Invest::find($id);
         $article = Article::find($invest->article_id);
-
+        $user = User::find($invest->user_id);
         return view('user.trade.edit')
             ->with('invest', $invest)
-            ->with('article', $article);
+            ->with('article', $article)
+            ->with('user', $user);
     }
 
     /**

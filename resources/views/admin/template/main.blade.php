@@ -8,6 +8,12 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('plugins/chosen/chosen.css')}}">
 	<link rel="stylesheet" href="{{ asset('plugins/trumbowyg/dist/ui/trumbowyg.min.css')}}">
 	<link rel="stylesheet" href="{{ asset('general.css')}}">
+
+	<script>
+	function cuenta(){
+		document.forms[0].caracteres.value=document.forms[0].texto.value.length
+	}
+	</script>
 </head>
 <style>
 section {

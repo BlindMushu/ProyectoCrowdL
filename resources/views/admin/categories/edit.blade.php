@@ -1,7 +1,7 @@
 @extends('admin.template.main')
 
 @section('title','Editar categoria '. $category->name)
-
+<br>
 @section('content')
 	{!! Form::open(['route' => ['categories.update', $category], 'method' => 'PUT'])!!}
 		<div class="form-group">

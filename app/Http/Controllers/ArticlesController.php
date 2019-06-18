@@ -33,9 +33,20 @@ class ArticlesController extends Controller
             $articles -> user;
             $articles -> images;
         });
-
+        foreach ($articles as $article) {
+            $sum = 0;
+            $invests = Invest::where('article_id', $article->id)->get();
+            foreach($invests as $invest){
+                $sum = $sum + $invest->amount;
+            }
+            $data[] = [
+                    'article_id' => $article->id,
+                    'amount_collected' => $sum
+                ];
+        }
         return view('admin.articles.index')
-            ->with('articles', $articles);
+            ->with('articles', $articles)
+            ->with('data', $data);
     }
 
     /**
@@ -72,15 +83,15 @@ class ArticlesController extends Controller
         $article = new Article($request ->all());
         $article->user_id = \Auth::user()->id;
 
-        if($article->years < 2)
+        if($article->years < 24)
         {
             $article->interest = 18;
         }
-        if($article->years >= 2 && $article->years <= 5)
+        if($article->years >= 24 && $article->years <= 60)
         {
             $article->interest = 11;
         }
-        else
+        if($article->years > 60)
         {
             $article->interest = 6;
         }
@@ -172,7 +183,8 @@ class ArticlesController extends Controller
 
         $collection = collect($data2)->paginate(10);
         return view('admin.articles.show')
-        ->with('collection', $collection);
+        ->with('collection', $collection)
+        ->with('article', $article);
     }
 
     /**

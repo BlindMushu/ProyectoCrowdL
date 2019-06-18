@@ -1,7 +1,7 @@
 @extends('admin.template.main')
 
 @section('title', 'Agregar Tag')
-
+<br>
 @section('content')
 	{!!Form::open(['route' => 'tags.store', 'method' =>'POST'])!!}
 		<div class="form-group">

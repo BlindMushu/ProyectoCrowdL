@@ -42,7 +42,6 @@
         @else
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item active"><a class="nav-link" href="{{ route('admin.welcome')}}">Inicio</a></li>
-      <li class="nav-item active"><a class="nav-link" href="">Mi estado</a></li>
       <li class="nav-item active"><a class="nav-link" href="{{ route('invests.index')}}">Inversiones</a></li>
       <li class="nav-item active"><a class="nav-link" href="{{ route('articles.index')}}">Mis proyectos</a></li>
 

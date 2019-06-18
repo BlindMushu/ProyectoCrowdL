@@ -1,7 +1,7 @@
 @extends('admin.template.main')
 
 @section('title','Listado de proyectos')
-
+<br>
 @section('content')
 	<div class="row">
 		<div class="col-md-8">
@@ -33,7 +33,7 @@
 		  						<div class="progress-bar bg-info" role="progressbar" style="width: {{($d['amount_collected']/$article->amount)*100}}%" aria-valuenow="{{$d['amount_collected']}}" aria-valuemin="0" aria-valuemax="{{$article->amount}}">{{floor(($d['amount_collected']/$article->amount)*100)}}%</div>
 								</div>
 								<center><small>{{$d['amount_collected']}} Bs. reunidos de {{$article->amount}} Bs.</small></center>
-								@endif()
+								@endif
 							@endif
 
 						@endforeach

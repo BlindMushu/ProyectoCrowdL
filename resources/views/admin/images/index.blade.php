@@ -1,7 +1,7 @@
 @extends('admin.template.main')
 
 @section('title', 'Listado de imagenes')
-
+<br>
 @section('content')
 		<div class="row">
 				@foreach($images as $image)

@@ -1,6 +1,6 @@
 @extends('admin.template.main')
 @section('title', $article->title)
-
+<br>
 @section('content')
 <h3 class="title-front left">{{$article->title}}</h3>
 <hr>
@@ -26,7 +26,7 @@
   				</thead>
   				<tbody>
 
-  				<tr style="border: hidden">
+  				<tr >
 				    <td style="border: hidden"><h5><center>{{$article->user->name}}</center></h5></td>
 				    <td style="border: hidden"><h5><center>{{$article->amount}} Bs.</center></h5></td>
 				    <td style="border: hidden"><h5><center>{{$article->years}} años</center></h5></td>
@@ -48,10 +48,11 @@
 					{{Form::hidden('article_id', $article->id ,['class' => 'form-control'])}}
 					</td>
 					<td>
+
 						@if(Auth::user()->id === $article->user_id)
 							{!!Form::number('amount', null,['class' => 'form-control', 'readonly'=>'readonly'])!!}
 						@else
-							{!!Form::number('amount', null,['class' => 'form-control', 'min' => '1', 'max' => $article->amount - $sum, 'placeholder' => $article->amount - $sum, 'required'])!!}
+							{!!Form::number('amount', null,['class' => 'form-control', 'min' => '1', 'max' => $article->amount - $sum, 'placeholder' => 'El monto maximo para la inversion es de '. ($article->amount - $sum) . ' Bs.', 'required'])!!}
 						@endif
 
 					</td>

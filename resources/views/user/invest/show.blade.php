@@ -1,7 +1,9 @@
 @extends('admin.template.main')
 
 @section('title', 'Listado de pagos de la inversion ' . $invest->id)
-
+<br>
+@if($invest->flag_if_sale == 0)
+    @if(Auth::user()->id === $invest->user_id)
 @section('content')
 
 	<div>
@@ -56,3 +58,14 @@
 	</table>
 
 @endsection
+    @else
+        @section('content')
+        <li class="list-group-item list-group-item-danger">Acceso denegado.</li>
+        @endsection
+    @endif
+
+@else
+@section('content')
+        <li class="list-group-item list-group-item-danger">Accesso denegado.</li>
+@endsection
+@endif
