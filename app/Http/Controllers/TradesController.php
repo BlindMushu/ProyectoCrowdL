@@ -27,7 +27,7 @@ class TradesController extends Controller
      */
     public function index()
     {
-        $invests = Invest::where('flag_if_sale', '=', 1)->orderBy('updated_at','DESC')->get();
+        $invests = Invest::where('flag_if_sale', '=', 1)->where('deleted_at', '=', null)->orderBy('updated_at','DESC')->get();
         $data=[];
         $article;
         foreach($invests as $invest)

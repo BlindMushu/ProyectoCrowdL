@@ -21,9 +21,7 @@
 
 	<div class="form-group">
 		{!!Form::label('content', 'Contenido')!!}
-		{!!Form::textarea('content', null,['class' => 'form-control textarea-content','placeholder' => 'Establezca los motivos de su proyecto, minimo 60 caracteres.', 'name' => 'texto', 'onKeyDown' => 'cuenta()','onKeyUp' =>'cuenta()' ])!!}
-		Caracteres: <input type="text" class="sinborde" name="caracteres" size=4, readonly>
-
+		{!!Form::textarea('content', null,['class' => 'form-control textarea-content','placeholder' => 'Establezca los motivos de su proyecto, minimo 60 caracteres.'])!!}
 	</div>
 
 	<div class="form-group">
@@ -64,5 +62,6 @@
 		placeholder_text_single: 'Seleccione una categoria...'
 	});
 
+	$('.textarea-content').trumbowyg();
 </script>
 @endsection

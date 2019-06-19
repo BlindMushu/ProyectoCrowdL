@@ -15,6 +15,7 @@ use App\Image;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\ArticleRequest;
 use App\Payment;
+use App\PaymentInvest;
 use Carbon\Carbon;
 
 class ArticlesController extends Controller
@@ -26,27 +27,42 @@ class ArticlesController extends Controller
      */
     public function index(Request $request)
     {
+        $data = [];
         $a = \Auth::user()->id;
-        $articles = Article::Search($request -> title)->where('user_id', $a)->orderBy('id','DESC')->paginate(5);
-        $articles -> each(function($articles){
-            $articles -> category;
-            $articles -> user;
-            $articles -> images;
-        });
-        foreach ($articles as $article) {
-            $sum = 0;
-            $invests = Invest::where('article_id', $article->id)->get();
-            foreach($invests as $invest){
-                $sum = $sum + $invest->amount;
+        $b = \Auth::user()->type;
+        if($b == 'member'){
+            $articles = Article::Search($request -> title)->where('user_id', $a)->orderBy('id','DESC')->paginate(5);
+            $articles -> each(function($articles){
+                $articles -> category;
+                $articles -> user;
+                $articles -> images;
+            });
+            foreach ($articles as $article) {
+                $sum = 0;
+                $invests = Invest::where('article_id', $article->id)->get();
+                foreach($invests as $invest){
+                    $sum = $sum + $invest->amount;
+                }
+                $data[] = [
+                        'article_id' => $article->id,
+                        'amount_collected' => $sum
+                    ];
             }
-            $data[] = [
-                    'article_id' => $article->id,
-                    'amount_collected' => $sum
-                ];
+            return view('admin.articles.index')
+                ->with('articles', $articles)
+                ->with('data', $data);
         }
-        return view('admin.articles.index')
-            ->with('articles', $articles)
-            ->with('data', $data);
+        else{
+            $articles = Article::Search($request -> title)->orderBy('id','DESC')->paginate(5);
+            $articles -> each(function($articles){
+                $articles -> category;
+                $articles -> user;
+            });
+            return view('admin.articles.index')
+                ->with('articles', $articles);
+
+        }
+
     }
 
     /**
@@ -238,9 +254,29 @@ class ArticlesController extends Controller
     public function destroy($id)
     {
         $article = Article::find($id);
+        $invests = Invest::where('article_id', $article->id)->get();
+        $payments = Payment::where('article_id', $article->id)->get();
+
+        foreach ($invests as $invest) {
+            $paymentinvests = PaymentInvest::where('invest_id', $invest->id);
+
+            foreach ($paymentinvests as $key) {
+                $key = PaymentInvest::find($key->id);
+                $key->delete();
+            }
+        }
+
+        foreach ($payments as $payment) {
+            $payment_delete = Payment::find($payment->id);
+            $payment_delete->delete();
+        }
+        foreach ($invests as $invest) {
+            $invest_delete = Invest::find($invest->id);
+            $invest_delete->delete();
+        }
         $article->delete();
 
-        Flash::error('Se ha borrado el articulo '. $article->title. ' de forma exitosa');
+        Flash::error('Se ha borrado el articulo '. $article->title. ' de forma exitosa y todas sus inversiones');
         return redirect()->route('articles.index');
     }
 
