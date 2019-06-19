@@ -45,7 +45,7 @@
       <li class="nav-item active"><a class="nav-link" href="{{ route('invests.index')}}">Inversiones</a></li>
       <li class="nav-item active"><a class="nav-link" href="{{ route('articles.index')}}">Mis proyectos</a></li>
 
-      <li class="nav-item active"><a class="nav-link" href="{{ route('trades.index')}}">Trading</a></li>
+      <li class="nav-item active"><a class="nav-link" href="{{ route('trades.index')}}">Venta</a></li>
       </ul>
       <ul class = "nav navbar-nav navbar-right">
         <li><a href="{{route('home.index')}}" target ="_blank"></a></li>

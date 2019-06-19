@@ -52,7 +52,7 @@ class PaysController extends Controller
         $article = Article::find($id);
         $payments = Payment::where('article_id', $article->id)->orderBy('num_pay','ASC')->paginate(10);
         //$fecha_actual = date("Y-m-d");
-        $fecha_actual = "2019-06-28";
+        $fecha_actual = "2019-07-19";
         return view('user.pay.show')
             ->with('payments', $payments)
             ->with('article', $article)

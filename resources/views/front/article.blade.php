@@ -29,7 +29,7 @@
   				<tr >
 				    <td style="border: hidden"><h5><center>{{$article->user->name}}</center></h5></td>
 				    <td style="border: hidden"><h5><center>{{$article->amount}} Bs.</center></h5></td>
-				    <td style="border: hidden"><h5><center>{{$article->years}} años</center></h5></td>
+				    <td style="border: hidden"><h5><center>{{$article->years}} meses</center></h5></td>
 				    <td style="border: hidden"><h5><center>{{$article->interest}}%</center></h5></td>
 				    <td style="border: hidden"><h5><center>{{$sum}} Bs.</center></h5></td>
   				</tr>

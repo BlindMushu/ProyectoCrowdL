@@ -82,7 +82,9 @@
             <div class="content">
                 <div class="title m-b-md">
                     CrowdLending
+                    <br>
                 </div>
+                <h3>Financiación rápida y sencilla para impulsar tu negocio.</h3>
             </div>
         </div>
     </body>
